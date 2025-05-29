@@ -21,72 +21,6 @@
     background: #f4f6f8;
     color: var(--text-color);
   }
- 
-/* Auth Pages */
-.auth-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: var(--light-color);
-  width: 100%;
-}
-
-.auth-container {
-  background: #fff;
-  padding: 40px;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-}
-
-.auth-container h2 {
-  color: var(--primary-color);
-  margin-bottom: 25px;
-  font-size: 2rem;
-}
-
-.auth-container .form-group {
-  margin-bottom: 20px;
-  text-align: right; /* RTL support */
-}
-
-.auth-container label {
-  font-size: 1.1em;
-}
-
-.auth-container input[type=text],
-.auth-container input[type=password] {
-  padding: 12px 15px;
-  font-size: 1.1em;
-  border-radius: 6px;
-}
-
-.auth-container .btn {
-  width: 100%;
-  padding: 12px 20px;
-  font-size: 1.1em;
-  justify-content: center;
-  margin-top: 15px;
-}
-
-.auth-switch {
-  margin-top: 25px;
-  font-size: 1em;
-  color: var(--text-color);
-}
-
-.auth-switch a {
-  color: var(--secondary-color);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.auth-switch a:hover {
-  text-decoration: underline;
-}
 
   .container {
     display: flex;
@@ -476,72 +410,6 @@
 </head>
 <body>
 
-<div id="login-page" class="auth-page">
-  <div class="auth-container">
-    <h2>تسجيل الدخول</h2>
-    <div id="login-alert" class="alert"></div>
-    <form id="form-login">
-      <div class="form-group">
-        <label for="login-username">اسم المستخدم:</label>
-        <input type="text" id="login-username" required />
-      </div>
-      <div class="form-group">
-        <label for="login-password">كلمة المرور:</label>
-        <input type="password" id="login-password" required />
-      </div>
-      <button type="submit" class="btn btn-success">
-        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14.5c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
-        </svg>
-        تسجيل الدخول
-      </button>
-    </form>
-    <p class="auth-switch">ليس لديك حساب؟ <a href="#" id="show-register">سجل الآن</a></p>
-  </div>
-</div>
-
-<div id="register-page" class="auth-page" style="display:none;">
-  <div class="auth-container">
-    <h2>إنشاء حساب جديد</h2>
-    <div id="register-alert" class="alert"></div>
-    <form id="form-register">
-      <div class="form-group">
-        <label for="register-username">اسم المستخدم:</label>
-        <input type="text" id="register-username" required />
-      </div>
-      <div class="form-group">
-        <label for="register-password">كلمة المرور:</label>
-        <input type="password" id="register-password" required />
-      </div>
-      <div class="form-group">
-        <label for="register-confirm-password">تأكيد كلمة المرور:</label>
-        <input type="password" id="register-confirm-password" required />
-      </div>
-      <button type="submit" class="btn btn-success">
-        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/>
-        </svg>
-        تسجيل حساب
-      </button>
-    </form>
-    <p class="auth-switch">لديك حساب بالفعل؟ <a href="#" id="show-login">تسجيل الدخول</a></p>
-  </div>
-</div>
-
-<div class="container" id="main-app" style="display:none;">
-  <div class="sidebar" id="app-sidebar">
-    </div>
-  <div class="content" id="content-area">
-    </div>
-</div>
-
-<div id="deleteModal" class="modal">...</div>
-<div id="editSwimmerModal" class="modal">...</div>
-<div id="editRaceModal" class="modal">...</div>
-
-
-
-
 <div class="container">
   <div class="sidebar">
     <h2>نظام إدارة السباحين</h2>
@@ -895,27 +763,7 @@
 </div>
 
 <script>
-  // عناصر صفحات المصادقة (Auth Pages)
-  const loginPage = document.getElementById('login-page');
-  const registerPage = document.getElementById('register-page');
-  const mainApp = document.getElementById('main-app'); // الحاوية الرئيسية لتطبيقك (الشريط الجانبي + المحتوى)
-
-  // نماذج المصادقة والأزرار
-  const formLogin = document.getElementById('form-login');
-  const loginUsernameInput = document.getElementById('login-username');
-  const loginPasswordInput = document.getElementById('login-password');
-  const loginAlert = document.getElementById('login-alert');
-
-  const formRegister = document.getElementById('form-register');
-  const registerUsernameInput = document.getElementById('register-username');
-  const registerPasswordInput = document.getElementById('register-password');
-  const registerConfirmPasswordInput = document.getElementById('register-confirm-password');
-  const registerAlert = document.getElementById('register-alert');
-
-  const showRegisterLink = document.getElementById('show-register');
-  const showLoginLink = document.getElementById('show-login');
-
-  // صفحات المحتوى الأصلية (من الكود الخاص بك)
+  // صفحات المحتوى
   const pages = document.querySelectorAll('.page');
   const navItems = document.querySelectorAll('.nav-item');
 
@@ -923,130 +771,6 @@
   let selectedSwimmerId = null;
   let selectedRaceId = null;
 
-  // --- دوال المصادقة (Auth Functions) ---
-
-  function showAuthPage(page) {
-    loginPage.style.display = 'none';
-    registerPage.style.display = 'none';
-    mainApp.style.display = 'none'; // تأكد من إخفاء التطبيق الرئيسي
-
-    if (page === 'login') {
-      loginPage.style.display = 'flex';
-    } else if (page === 'register') {
-      registerPage.style.display = 'flex';
-    }
-  }
-
-  function showApp() {
-    loginPage.style.display = 'none';
-    registerPage.style.display = 'none';
-    mainApp.style.display = 'flex'; // إظهار حاوية التطبيق الرئيسي
-    showPage('add-swimmer'); // الانتقال إلى الصفحة الافتراضية داخل التطبيق
-  }
-
-  // التعامل مع بيانات المستخدمين في LocalStorage (للمحاكاة فقط)
-  function getUsers() {
-    return JSON.parse(localStorage.getItem('users') || '[]');
-  }
-
-  function saveUsers(users) {
-    localStorage.setItem('users', JSON.stringify(users));
-  }
-
-  // المستخدم المسجل الدخول حاليًا (للمحاكاة فقط)
-  function getLoggedInUser() {
-    return localStorage.getItem('loggedInUser');
-  }
-
-  function setLoggedInUser(username) {
-    localStorage.setItem('loggedInUser', username);
-  }
-
-  function clearLoggedInUser() {
-    localStorage.removeItem('loggedInUser');
-  }
-
-  // التحقق عند تحميل الصفحة لأول مرة
-  document.addEventListener('DOMContentLoaded', () => {
-    if (getLoggedInUser()) {
-      showApp();
-    } else {
-      showAuthPage('login'); // إظهار صفحة تسجيل الدخول افتراضيًا
-    }
-  });
-
-  // التبديل بين تسجيل الدخول والتسجيل
-  showRegisterLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    showAuthPage('register');
-    registerAlert.style.display = 'none'; // مسح التنبيهات السابقة
-    formRegister.reset(); // مسح حقول النموذج
-  });
-
-  showLoginLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    showAuthPage('login');
-    loginAlert.style.display = 'none'; // مسح التنبيهات السابقة
-    formLogin.reset(); // مسح حقول النموذج
-  });
-
-  // التعامل مع التسجيل (Registration)
-  formRegister.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const username = registerUsernameInput.value.trim();
-    const password = registerPasswordInput.value;
-    const confirmPassword = registerConfirmPasswordInput.value;
-
-    if (!username || !password || !confirmPassword) {
-      showAlert('register-alert', 'الرجاء ملء جميع الحقول.', 'error');
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      showAlert('register-alert', 'كلمة المرور وتأكيدها غير متطابقين.', 'error');
-      return;
-    }
-
-    const users = getUsers();
-    if (users.some(u => u.username === username)) {
-      showAlert('register-alert', 'اسم المستخدم هذا موجود بالفعل.', 'error');
-      return;
-    }
-
-    users.push({ username, password }); // في تطبيق حقيقي، يجب تشفير كلمة المرور (hash password)
-    saveUsers(users);
-    showAlert('register-alert', 'تم التسجيل بنجاح! يمكنك الآن تسجيل الدخول.', 'success');
-    formRegister.reset();
-    setTimeout(() => showAuthPage('login'), 2000); // إعادة التوجيه لصفحة الدخول بعد 2 ثانية
-  });
-
-  // التعامل مع تسجيل الدخول (Login)
-  formLogin.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const username = loginUsernameInput.value.trim();
-    const password = loginPasswordInput.value;
-
-    if (!username || !password) {
-      showAlert('login-alert', 'الرجاء إدخال اسم المستخدم وكلمة المرور.', 'error');
-      return;
-    }
-
-    const users = getUsers();
-    const user = users.find(u => u.username === username && u.password === password); // في تطبيق حقيقي، قارن كلمات المرور المشفرة
-
-    if (user) {
-      setLoggedInUser(username); // تخزين المستخدم المسجل الدخول
-      showAlert('login-alert', 'تم تسجيل الدخول بنجاح!', 'success');
-      formLogin.reset();
-      setTimeout(showApp, 1000); // إظهار التطبيق الرئيسي بعد ثانية
-    } else {
-      showAlert('login-alert', 'اسم المستخدم أو كلمة المرور غير صحيحة.', 'error');
-    }
-  });
-
-  // --- نهاية دوال المصادقة ---
-
-  // دوال إدارة الصفحات الأصلية
   function showPage(pageId) {
     pages.forEach(p => {
       p.style.display = p.id === pageId ? 'block' : 'none';
@@ -1078,7 +802,7 @@
     }
 
     // إعادة تحميل البيانات عند عرض الصفحة
-    if (pageId === 'add-race') {
+    if(pageId === 'add-race') {
       populateSwimmersDropdown();
     }
   }
@@ -1171,7 +895,7 @@
       (s.notes && s.notes.toLowerCase().includes(searchTerm))
     );
 
-    if (filtered.length === 0) {
+    if(filtered.length === 0) {
       tbody.innerHTML = '<tr><td colspan="7">لا توجد نتائج</td></tr>';
       toggleGlobalButtons('swimmer'); // Disable buttons if no results
       return;
@@ -1242,7 +966,7 @@
     const select = document.getElementById(selectId);
     select.innerHTML = '<option value="">اختر سباح</option>';
 
-    if (swimmers.length === 0) {
+    if(swimmers.length === 0) {
       select.innerHTML = '<option value="">لا يوجد سباحين</option>';
       return;
     }
@@ -1299,7 +1023,7 @@
       (r.raceNotes && r.raceNotes.toLowerCase().includes(searchTerm))
     );
 
-    if (filtered.length === 0) {
+    if(filtered.length === 0) {
       tbody.innerHTML = '<tr><td colspan="4">لا توجد نتائج</td></tr>';
       toggleGlobalButtons('race'); // Disable buttons if no results
       return;
@@ -1353,7 +1077,7 @@
       return;
     }
 
-    if (type === 'swimmer') {
+    if(type === 'swimmer') {
       const swimmers = getSwimmers();
       const swimmer = swimmers.find(s => s.id == currentDeleteId);
       deleteMessage.textContent = `هل أنت متأكد أنك تريد حذف السباح "${swimmer.name || 'هذا السباح'}"؟`;
@@ -1367,7 +1091,7 @@
   }
 
   confirmDeleteBtn.addEventListener('click', () => {
-    if (currentDeleteType === 'swimmer') {
+    if(currentDeleteType === 'swimmer') {
       const swimmers = getSwimmers();
       const updatedSwimmers = swimmers.filter(s => s.id != currentDeleteId);
       saveSwimmers(updatedSwimmers);
@@ -1417,7 +1141,7 @@
     const swimmers = getSwimmers();
     const swimmer = swimmers.find(s => s.id == selectedSwimmerId);
 
-    if (!swimmer) {
+    if(!swimmer) {
       showAlert('swimmers-alert', 'السباح غير موجود', 'error');
       selectedSwimmerId = null; // Clear invalid selection
       toggleGlobalButtons('swimmer');
@@ -1451,7 +1175,7 @@
     const swimmers = getSwimmers();
     const swimmerIndex = swimmers.findIndex(s => s.id == id);
 
-    if (swimmerIndex === -1) {
+    if(swimmerIndex === -1) {
       showAlert('edit-swimmer-alert', 'السباح غير موجود', 'error');
       return;
     }
@@ -1490,7 +1214,7 @@
     const races = getRaces();
     const race = races.find(r => r.id == selectedRaceId);
 
-    if (!race) {
+    if(!race) {
       showAlert('races-alert', 'السباق غير موجود', 'error');
       selectedRaceId = null; // Clear invalid selection
       toggleGlobalButtons('race');
@@ -1521,7 +1245,7 @@
     const races = getRaces();
     const raceIndex = races.findIndex(r => r.id == id);
 
-    if (raceIndex === -1) {
+    if(raceIndex === -1) {
       showAlert('edit-race-alert', 'السباق غير موجود', 'error');
       return;
     }
@@ -1557,24 +1281,8 @@
   document.getElementById('edit-selected-race').addEventListener('click', editRace);
   document.getElementById('delete-selected-race').addEventListener('click', () => confirmDelete('race'));
 
-  // زر تسجيل الخروج (أضف هذا الجزء في الشريط الجانبي HTML الخاص بك)
-  // <div class="nav-item" id="logout-button">
-  //   <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
-  //     <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5-5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
-  //   </svg>
-  //   تسجيل الخروج
-  // </div>
-  const logoutButton = document.getElementById('logout-button');
-  if (logoutButton) { // تحقق من وجود الزر قبل إضافة المستمع
-    logoutButton.addEventListener('click', () => {
-      clearLoggedInUser();
-      showAuthPage('login');
-      showAlert('login-alert', 'تم تسجيل الخروج بنجاح.', 'success');
-    });
-  }
-
-  // تم إزالة السطر: showPage('add-swimmer');
-  // لأنه تم استبداله بمنطق التحقق من تسجيل الدخول في DOMContentLoaded.
+  // افتح صفحة إضافة سباح أول ما تحمل الصفحة
+  showPage('add-swimmer');
 </script>
 
 </body>
